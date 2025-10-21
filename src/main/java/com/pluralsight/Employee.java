@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 public class Employee {
@@ -11,6 +12,9 @@ public class Employee {
     private String employeeId,name,department;
     private double payRate,hoursWorked,lastClockIn;
     private boolean overtime;
+
+
+
 
     public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -93,11 +97,6 @@ public class Employee {
     }
 
     public void punchTimeCard(String key) {
-
-
-
-
-
         double startTime = 0;
         if (key.equalsIgnoreCase("in")) {
             System.out.println("Enter Start Time (00.00)");
@@ -120,7 +119,52 @@ public class Employee {
         }
     }
 
+    public void punchIn(double time){
+        lastClockIn = time;
+        System.out.println("Punch in time: " + time);
+    }
 
+    public void punchOut(double time){
+        if(lastClockIn == 0){
+            System.out.println("Error No Punch In Detected");
+        }else{
+            double totalTime = Math.abs(lastClockIn - time);
+            System.out.println("Punch out time: " + time);
+            System.out.println("Hours worked: " + totalTime);
+            hoursWorked += totalTime;
+            lastClockIn = 0;}
+    }
 
+    public void punchIn(){
+        LocalDateTime startTime = LocalDateTime.now().minusHours(2);
+
+        double hour = startTime.getHour();
+
+        double minute = startTime.getMinute();
+
+        lastClockIn = hour + (minute/60);
+
+        System.out.println("Punch in time: " + startTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd | HH:mm")));
+    }
+
+    public void punchOut(){
+        LocalDateTime startTime = LocalDateTime.now();
+
+        double hour = startTime.getHour();
+
+        double minute = startTime.getMinute();
+
+        double endTime = hour + (minute/60);
+
+        if(lastClockIn == 0){
+            System.out.println("Error No Punch In Detected");
+        }else{
+            double totalTime = Math.abs(lastClockIn - endTime);
+            System.out.println("Punch out time: " + startTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd | HH:mm")));
+
+            System.out.println("Hours worked: " + totalTime);
+            hoursWorked += totalTime;
+            lastClockIn = 0;}
+    }
 
 }

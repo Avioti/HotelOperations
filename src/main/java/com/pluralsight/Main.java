@@ -13,8 +13,8 @@ public class Main {
         System.out.println(testEmployee.getOvertimeHours());
         System.out.println(testEmployee.getRegularHours());
         System.out.println(testEmployee.getHoursWorked());
-        testEmployee.punchTimeCard("in");
-        testEmployee.punchTimeCard("out");
+        testEmployee.punchIn();
+        testEmployee.punchOut();
         System.out.println(testEmployee.getOvertimeHours());
         System.out.println(testEmployee.getRegularHours());
         System.out.println(testEmployee.getHoursWorked());
