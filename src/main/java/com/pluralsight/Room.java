@@ -83,7 +83,8 @@ public class Room {
     public void checkOut(){
 
         this.occupied = false;
-        cleanRoom();
+        this.dirty = true;
+
 
     }
 

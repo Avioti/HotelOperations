@@ -85,9 +85,9 @@ public class Employee {
     }
 
     public double getTotalPay(){
-        double regularPay = this.payRate * this.getRegularHours();
+        double regularPay = this.payRate * getRegularHours();
 
-        double overtimePay = (this.payRate * 1.5) * this.getOvertimeHours();
+        double overtimePay = (this.payRate * 1.5) * getOvertimeHours();
 
         return regularPay + overtimePay;
     }
@@ -106,6 +106,9 @@ public class Employee {
             System.out.println("Punch in time: " + startTime);
 
         } else if (key.equalsIgnoreCase("out")) {
+            if(lastClockIn == 0){
+                System.out.println("Error No Punch In Detected");
+            }else{
             System.out.println("Enter End time (00.00)");
             double endTime = scanner.nextDouble();
             double totalTime = Math.abs(lastClockIn - endTime);
@@ -113,7 +116,7 @@ public class Employee {
             System.out.println("Punch out time: " + endTime);
             System.out.println("Hours worked: " + totalTime);
             hoursWorked += totalTime;
-            lastClockIn = 0;
+            lastClockIn = 0;}
         }
     }
 
