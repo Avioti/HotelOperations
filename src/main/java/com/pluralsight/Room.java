@@ -70,4 +70,24 @@ public class Room {
     public boolean isAvailable() {
         return !occupied && !dirty;
     }
+
+    public void checkIn(){
+        if(isAvailable()){
+                this.occupied = true;
+                this.dirty = true;}
+
+
+
+    }
+
+    public void checkOut(){
+
+        this.occupied = false;
+        cleanRoom();
+
+    }
+
+    public void cleanRoom(){
+        this.dirty = false;
+    }
 }

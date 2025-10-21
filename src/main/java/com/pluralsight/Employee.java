@@ -1,8 +1,15 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 public class Employee {
+
+    public static Scanner scanner = new Scanner(System.in);
     private String employeeId,name,department;
-    private double payRate,hoursWorked;
+    private double payRate,hoursWorked,lastClockIn;
     private boolean overtime;
 
     public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
@@ -78,7 +85,36 @@ public class Employee {
     }
 
     public double getTotalPay(){
-        return this.hoursWorked * this.payRate;
+        double regularPay = this.payRate * this.getRegularHours();
+
+        double overtimePay = (this.payRate * 1.5) * this.getOvertimeHours();
+
+        return regularPay + overtimePay;
+    }
+
+    public void punchTimeCard(String key) {
+
+
+
+
+
+        double startTime = 0;
+        if (key.equalsIgnoreCase("in")) {
+            System.out.println("Enter Start Time (00.00)");
+            startTime = scanner.nextDouble();
+            lastClockIn = startTime;
+            System.out.println("Punch in time: " + startTime);
+
+        } else if (key.equalsIgnoreCase("out")) {
+            System.out.println("Enter End time (00.00)");
+            double endTime = scanner.nextDouble();
+            double totalTime = Math.abs(lastClockIn - endTime);
+
+            System.out.println("Punch out time: " + endTime);
+            System.out.println("Hours worked: " + totalTime);
+            hoursWorked += totalTime;
+            lastClockIn = 0;
+        }
     }
 
 
