@@ -167,4 +167,43 @@ public class Employee {
             lastClockIn = 0;}
     }
 
+    public void punchTimeCard() {
+        System.out.println("Are you clocking in or Out?");
+        System.out.print("Enter: ");
+
+        String key = scanner.nextLine();
+
+
+        if (key.equalsIgnoreCase("in")) {
+            LocalDateTime startTime = LocalDateTime.now().minusHours(2);
+
+            double hour = startTime.getHour();
+
+            double minute = startTime.getMinute();
+
+            lastClockIn = hour + (minute/60);
+
+            System.out.println("Punch in time: " + startTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd | HH:mm")));
+
+        } else if (key.equalsIgnoreCase("out")) {
+            LocalDateTime startTime = LocalDateTime.now();
+
+            double hour = startTime.getHour();
+
+            double minute = startTime.getMinute();
+
+            double endTime = hour + (minute/60);
+
+            if(lastClockIn == 0){
+                System.out.println("Error No Punch In Detected");
+            }else{
+                double totalTime = Math.abs(lastClockIn - endTime);
+                System.out.println("Punch out time: " + startTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd | HH:mm")));
+
+                System.out.println("Hours worked: " + totalTime);
+                hoursWorked += totalTime;
+                lastClockIn = 0;}
+        }
+    }
+
 }
