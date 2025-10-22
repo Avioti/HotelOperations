@@ -142,7 +142,7 @@ public class Employee {
     }
 
     public void punchIn(){
-        LocalDateTime startTime = LocalDateTime.now().minusHours(2);
+        LocalDateTime startTime = LocalDateTime.now();
 
         double hour = startTime.getHour();
 
@@ -181,7 +181,7 @@ public class Employee {
 
 
         if (key.equalsIgnoreCase("in")) {
-            LocalDateTime startTime = LocalDateTime.now().minusHours(2);
+            LocalDateTime startTime = LocalDateTime.now();
 
             double hour = startTime.getHour();
 

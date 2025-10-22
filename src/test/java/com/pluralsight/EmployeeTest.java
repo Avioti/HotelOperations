@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,7 +64,26 @@ class EmployeeTest {
         testEmployee.punchTimeCard(key);
 
 
-        double expected = Double.parseDouble(time);   // convert String -> double
+        double expected = Double.parseDouble(time);
+        double actual = testEmployee.getLastClockIn();
+        assertEquals(expected,actual);
+    }
+
+
+    @Test
+    void punchTimeCard_punch_in_test_no_parameter() {
+
+
+        String key = "in";
+        testIn = new ByteArrayInputStream(key.getBytes());
+        System.setIn(testIn);
+        Employee testEmployee = new Employee("test","test","testing",10,0);
+
+        testEmployee.punchTimeCard();
+
+        LocalDateTime startTime = LocalDateTime.now();
+        double minute = startTime.getMinute();
+        double expected = startTime.getHour() + (minute/60);
         double actual = testEmployee.getLastClockIn();
         assertEquals(expected,actual);
     }
