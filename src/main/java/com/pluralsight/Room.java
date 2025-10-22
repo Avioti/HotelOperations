@@ -78,8 +78,12 @@ public class Room {
 
     }
 
-    public void cleanRoom(){
-        this.dirty = false;
+    public boolean cleanRoom(){
+        if(!this.occupied){
+            this.dirty = false;
+            return true;
+        }
+     return false;
     }
 
     @Override
