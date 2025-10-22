@@ -24,6 +24,10 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
+    public double getLastClockIn() {
+        return lastClockIn;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }
@@ -63,6 +67,8 @@ public class Employee {
     public void setHoursWorked(double hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
+
+
 
     public boolean isOvertime() {
         return this.hoursWorked > 40;
